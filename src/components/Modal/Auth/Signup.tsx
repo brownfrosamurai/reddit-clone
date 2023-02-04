@@ -8,21 +8,21 @@ import { FIREBASE_ERRORS } from '../../../firebase/errors';
 
 const Signup: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
-
+  // Set error state 
   const [error, setError] = useState('');
+  // Set sign up form state 
+  const [signupForm, setSignUpForm] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+  // Create firebase user with email and password 
   const [
     createUserWithEmailAndPassword,
     user,
     loading,
     userError,
   ] = useCreateUserWithEmailAndPassword(auth);
-
-  const [signupForm, setSignUpForm] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
-
   // Firebase logic 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -39,6 +39,7 @@ const Signup: React.FC = () => {
     }
 
     if (signupForm.password.length! > 6) {
+      // setError 
       setError('Password must be at least 6 characters long')
     }
 
@@ -46,6 +47,7 @@ const Signup: React.FC = () => {
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // update form state 
     setSignUpForm((prev) => ({
       ...prev,
       [event.target.name]: event.target.value
@@ -127,7 +129,7 @@ const Signup: React.FC = () => {
         {error || FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
 
-      <Button type='submit' width='100%' height='36px' mb={2} isLoading={loading}>
+      <Button type='submit' width='100%' height='36px' mt={2} mb={2} isLoading={loading}>
         Sign Up
       </Button>
       {/* Link to Log in */}
