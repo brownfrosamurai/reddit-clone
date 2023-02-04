@@ -2,18 +2,48 @@ import { authModalState } from '@/src/atoms/authModalAtom';
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '../../../firebase/clientApp';
+import { FIREBASE_ERRORS } from '../../../firebase/errors';
 
 const Signup: React.FC = () => {
-  const setAuthModalState = useSetRecoilState(authModalState)
+  const setAuthModalState = useSetRecoilState(authModalState);
 
-
+  const [error, setError] = useState('');
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    userError,
+  ] = useCreateUserWithEmailAndPassword(auth);
 
   const [signupForm, setSignUpForm] = useState({
     email: '',
     password: '',
     confirmPassword: ''
   })
+
+  // Firebase logic 
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (error) setError(''); // Reset error after form submittion
+    if (signupForm.password !== signupForm.confirmPassword) {
+      // setError 
+      setError('Passwords do not match');
+      return;
+    }
+    if (signupForm.password.length < 6) {
+      // setError 
+      setError('Passwords must be at least 6 digits long');
+      return;
+    }
+
+    if (signupForm.password.length! > 6) {
+      setError('Password must be at least 6 characters long')
+    }
+
+    createUserWithEmailAndPassword(signupForm.email, signupForm.password);
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpForm((prev) => ({
@@ -23,7 +53,7 @@ const Signup: React.FC = () => {
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Input
         name='email'
         required
@@ -89,7 +119,15 @@ const Signup: React.FC = () => {
         }}
         bg='grey.50'
       />
-      <Button type='submit' width='100%' height='36px' mb={2}>
+      <Text
+        textAlign='center'
+        color='red'
+        fontSize='10pt'
+      >
+        {error || FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
+      </Text>
+
+      <Button type='submit' width='100%' height='36px' mb={2} isLoading={loading}>
         Sign Up
       </Button>
       {/* Link to Log in */}
