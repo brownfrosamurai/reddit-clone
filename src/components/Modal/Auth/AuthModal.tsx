@@ -15,6 +15,7 @@ import { useRecoilState } from 'recoil';
 
 import AuthInputs from './AuthInputs';
 import OAuthButtons from './OAuthButtons';
+import ResetPassword from './ResetPassword';
 
 const AuthModal: React.FC = () => {
   const [modalState, setModalState] = useRecoilState(authModalState);
@@ -26,6 +27,11 @@ const AuthModal: React.FC = () => {
       open: false
     }))
   }
+
+  // const toggleView = () => setModalState({
+  //   ...modalState,
+  //   view: view as keyof typeof modalState.view
+  // });
 
   useEffect(() => {
     if (user) handleClose();
@@ -40,8 +46,8 @@ const AuthModal: React.FC = () => {
         <ModalContent>
           <ModalHeader textAlign='center'>
             {modalState.view === 'login' && 'Login'}
-            {modalState.view === 'signup' && 'Sign up'}
-            {modalState.view === 'resetPassword' && 'resetPassword'}
+            {modalState.view === 'signup' && 'Signup'}
+            {modalState.view === 'resetPassword' && 'Reset Password'}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -57,11 +63,14 @@ const AuthModal: React.FC = () => {
               justifyContent='center'
               width='70%'
             >
-              <OAuthButtons />
-              <Text color='gray.500' fontWeight={700}>OR</Text>
-              <AuthInputs />
-              {/* <ResetPassword/> */}
-
+              {modalState.view === 'login' || modalState.view === 'signup' ?
+                (<>
+                  <OAuthButtons />
+                  <Text color='gray.500' fontWeight={700}>OR</Text>
+                  <AuthInputs />
+                </>) :
+                <ResetPassword />
+              }
             </Flex>
           </ModalBody>
         </ModalContent>
