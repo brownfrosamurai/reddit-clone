@@ -4,11 +4,9 @@ import { GrAdd } from 'react-icons/gr';
 import {
   IoFilterCircleOutline,
   IoNotificationsOutline,
-  IoVideocamOffOutline
+  IoVideocamOutline
 } from 'react-icons/io5';
 import { BsArrowUpRightCircle, BsChatDots } from 'react-icons/bs';
-
-
 
 const Icons: React.FC = () => {
 
@@ -45,7 +43,7 @@ const Icons: React.FC = () => {
           borderRadius={4}
           _hover={{ bg: 'gray.200' }}
         >
-          <Icon as={IoVideocamOffOutline} fontSize={22} />
+          <Icon as={IoVideocamOutline} fontSize={22} />
         </Flex>
       </Flex>
       <>
