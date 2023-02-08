@@ -1,20 +1,83 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Icon } from '@chakra-ui/react';
 import { GrAdd } from 'react-icons/gr';
 import {
-IoFilterCircleOutline,
-IoNotificationsOutline,
-IoVideocamOffOutline
+  IoFilterCircleOutline,
+  IoNotificationsOutline,
+  IoVideocamOffOutline
 } from 'react-icons/io5';
+import { BsArrowUpRightCircle, BsChatDots } from 'react-icons/bs';
 
 
 
-const Icons:React.FC = () => {
-  
+const Icons: React.FC = () => {
+
   return (
     <Flex>
-      <Flex>Icons</Flex>
-      <></>
+      <Flex
+        display={{ base: 'none', md: 'flex' }}
+        align='center'
+        borderRight='1px solid'
+        borderColor='gray.200'
+      >
+        <Flex
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={BsArrowUpRightCircle} fontSize={20} />
+        </Flex>
+        <Flex
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={IoFilterCircleOutline} fontSize={22} />
+        </Flex>
+        <Flex
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={IoVideocamOffOutline} fontSize={22} />
+        </Flex>
+      </Flex>
+      <>
+        <Flex
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={BsChatDots} fontSize={20} />
+        </Flex>
+        <Flex
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={IoNotificationsOutline} fontSize={20} />
+        </Flex>
+        <Flex
+          display={{ base: 'none', md: 'flex' }}
+          mr={1.5} ml={1.5}
+          cursor='pointer'
+          padding={1}
+          borderRadius={4}
+          _hover={{ bg: 'gray.200' }}
+        >
+          <Icon as={GrAdd} fontSize={20} />
+        </Flex>
+      </>
     </Flex>
   )
 }

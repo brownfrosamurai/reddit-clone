@@ -88,8 +88,9 @@ const ResetPassword: React.FC = () => {
         <Text
           onClick={() => setAuthModalState(prev => ({ ...prev, view: 'login' }))}
         >
-          LOGIN
+          LOGIN 
         </Text>
+        <Text fontWeight={700}>|</Text>
         <Text
           onClick={() => setAuthModalState(prev => ({ ...prev, view: 'signup' }))}
         >

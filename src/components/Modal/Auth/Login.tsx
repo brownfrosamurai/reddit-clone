@@ -6,9 +6,7 @@ import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useSetRecoilState } from 'recoil';
 
-type LoginProps = {
-
-};
+type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -24,15 +22,13 @@ const Login: React.FC<LoginProps> = () => {
     email: '',
     password: ''
   })
-
-  // Firebase signin logic 
+  // Firebase login logic 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     signInWithEmailAndPassword(loginForm.email, loginForm.password)
   }
-
-
+  // Form handle change function 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // update form state 
     setLoginForm(prev => ({

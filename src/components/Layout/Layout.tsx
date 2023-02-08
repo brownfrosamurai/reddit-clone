@@ -1,6 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC = ({ children }: any | null) => {
   return (
     <>
       <Navbar />
