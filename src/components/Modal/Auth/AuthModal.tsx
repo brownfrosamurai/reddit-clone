@@ -28,14 +28,8 @@ const AuthModal: React.FC = () => {
     }))
   }
 
-  // const toggleView = () => setModalState({
-  //   ...modalState,
-  //   view: view as keyof typeof modalState.view
-  // });
-
   useEffect(() => {
     if (user) handleClose();
-    console.log('USER: ', user?.email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
