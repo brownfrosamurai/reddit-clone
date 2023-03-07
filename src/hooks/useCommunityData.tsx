@@ -1,19 +1,24 @@
 import { collection, doc, getDocs, increment, writeBatch } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { authModalState } from '../atoms/authModalAtom';
 import { Community, CommunitySnippets, communityState } from '../atoms/communitiesAtom';
 import { auth, firestore } from '../firebase/clientApp';
 
 const useCommunityData = () => {
     const [user] = useAuthState(auth);
+    const setAuthModalState = useSetRecoilState(authModalState);
     const [communityStateValue, setCommunityStateValue] = useRecoilState(communityState);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const onJoinOrLeaveCommunity = (communityData: Community, isJoined: boolean) => {
-        // if user is signed in
-        // if not open auth modal
+        if (!user) {
+            // open modal
+            setAuthModalState({ open: true, view: 'login' });
+            return;
+        }
 
         if (isJoined) {
             leaveCommunity(communityData.id);
@@ -97,7 +102,7 @@ const useCommunityData = () => {
             setError(error.message);
         }
 
-        setLoading(false)
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -107,7 +112,6 @@ const useCommunityData = () => {
     }, [user]);
 
     return {
-        //data and function
         communityStateValue,
         onJoinOrLeaveCommunity,
         loading

@@ -1,7 +1,7 @@
 import Navbar from '../Navbar/Navbar';
 
 type LayoutProps = {
-    children: [] | null;
+    children: any;
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
