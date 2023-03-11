@@ -23,7 +23,7 @@ const CommunityPage: React.FC<communityPageProps> = ({ communityData }) => {
             <Header communityData={communityData} />
             <PageContent>
                 <>
-                    <CreatePostLink/>
+                    <CreatePostLink />
                 </>
                 <>
                     <div>RHS</div>
@@ -35,8 +35,10 @@ const CommunityPage: React.FC<communityPageProps> = ({ communityData }) => {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     try {
+        console.log('running getServerSideProps');
         const communityDocRef = doc(firestore, 'communities', context.query.communityId as string);
         const communityDoc = await getDoc(communityDocRef);
+        console.log('running getServerSideProps');
 
         return {
             props: {
@@ -52,7 +54,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         };
     } catch (error) {
         // TODO add error page
-        console.log('getServerSideProps error', error);
+        console.log('getServerSideProps error - [community]', error);
     }
 }
 
