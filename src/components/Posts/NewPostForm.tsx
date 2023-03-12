@@ -9,9 +9,9 @@ import React, { useState } from 'react';
 import { BiPoll } from 'react-icons/bi';
 import { BsLink45Deg, BsMic } from 'react-icons/bs';
 import { IoDocumentText, IoImageOutline } from 'react-icons/io5';
-import ImageUpload from './ImageUpload';
+import ImageUpload from './PostForm/ImageUpload';
 import FormTabItem from './TabItem';
-import TextInputs from './TextInputs';
+import TextInputs from './PostForm/TextInputs';
 
 type NewPostFormProps = {
     user: User;
